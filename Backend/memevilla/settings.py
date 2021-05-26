@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'user',
     'memelord',
     'post',
+    'meme_api',
 
 
 
     #thirdparty
     'verify_email.apps.VerifyEmailConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'memevilla.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR /'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
