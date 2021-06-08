@@ -25,8 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #assoiciated with allauth
     'django.contrib.sites',
+    #assoiciated with allauth
     'user',
     'memelord',
     'post',
