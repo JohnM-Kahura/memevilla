@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
     # 'allauth.socialaccount.providers.instagram',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.twitter',
 ]
 
@@ -160,5 +161,14 @@ SOCIALACCOUNT_PROVIDERS={
             'access_types':'online'
         }
 
-    }
+    },
+    'facebook':{
+        'METHOD': 'oauth2',
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {
+            'auth_type': 'reauthenticate'
+            },
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERSION': 'v2.4'
+        }
 }
