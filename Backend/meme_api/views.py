@@ -7,6 +7,6 @@ class PostList(generics.ListCreateAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializer
 class PostDetail(generics.RetrieveAPIView):
-    query_set=Post.objects.all()
+    queryset=Post.objects.all()
     serializer_class=PostSerializer
     
