@@ -8,4 +8,5 @@ urlpatterns = [
     path('verification/',include('verify_email.urls')),
     path('',include('post.urls'),name='posts'),
     path('api/',include('meme_api.urls'),name='meme_api'),
+    path('api-auth/',include('rest_framework.urls',namespace='rest_framework'))
 ]

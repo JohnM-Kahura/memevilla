@@ -6,4 +6,4 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model=Post
         #comments is a class
-        fields=('image','laughs','views','date_time','comments')
+        fields=('id','image','laughs','views','date_time','comments')

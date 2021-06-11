@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'corsheaders',
 
     # 'allauth.socialaccount.providers.instagram',
     'allauth.socialaccount.providers.facebook',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -167,8 +169,17 @@ SOCIALACCOUNT_PROVIDERS={
         'SCOPE': ['email'],
         'AUTH_PARAMS': {
             'auth_type': 'reauthenticate'
-            },
+                },
         'LOCALE_FUNC': lambda request: 'en_US',
         'VERSION': 'v2.4'
         }
+}
+#cors config
+
+CORS_ALLOW_ALL_ORIGINS=True
+#django rest permissions
+REST_FRAMEWORK={
+    'DEFAULT_PERMISSIONS_CLASSES':[
+        'rest_framework.permissions.IsAuthenticated', 
+    ]
 }
