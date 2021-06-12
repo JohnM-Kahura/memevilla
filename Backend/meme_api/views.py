@@ -10,19 +10,14 @@ class PostUserWritePermission(BasePermission):
     def has_object_permission(self,request,view,obj):
         if request.method in SAFE_METHODS:
             return True 
-        return obj.creator == request.user     
-
-
-
-
-
-
+        return obj.user == request.user     
 
 class PostList(generics.ListCreateAPIView):
     permission_classes=[IsAuthenticatedOrReadOnly]
     queryset=Post.objects.all()
     serializer_class=PostSerializer
-class PostDetail(generics.RetrieveAPIView):
+class PostDetail(generics.RetrieveUpdateDestroyAPIView,PostUserWritePermission):
+    permission_classes=[PostUserWritePermission]
     queryset=Post.objects.all()
     serializer_class=PostSerializer
     
