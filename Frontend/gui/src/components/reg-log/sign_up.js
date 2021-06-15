@@ -1,5 +1,7 @@
   
-import React from 'react';
+import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
+import axiosInstance from '../../axios_setup';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +15,28 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import axiosInstance from '../../axios_setup';
+
+
+export default function SignUp(){
+  const history=useHistory()
+  const initialFormData=Object.freeze({
+    email:'',
+    username:'',
+    password:'',
+
+  })
+  const [formData, setformData] = useState(initialFormData)
+  const handleChange=(e)=>{
+    updateFormData(
+      {
+        ...formData,
+        [e.target.name]:e.target.value.trim(),
+      }
+    )
+  }
+
+}
 
 function Copyright() {
   return (
@@ -147,6 +171,7 @@ export default function Register() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick
             >
               Sign In
             </Button>
