@@ -1,5 +1,5 @@
   
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import axiosInstance from '../../axios_setup';
 
 function Copyright() {
   return (
@@ -59,6 +61,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const history=useHistory()
+  const initialFormData=Object.freeze({
+    email:'',
+    password:'',
+
+
+  })
+  const [formData, setformData] = useState(initialFormData)
+  const handleChange =(e)=>{
+    setformData({
+      ...formData,
+      [e.target.name]:e.target.value.trim(),
+    })
+  }
+  const handleSubmit =(e)=>{
+    e.preventDefault()
+    console.log(formData)
+    axiosInstance.post(`token/`,{
+      email:formData.email,
+      password:formData.password
+    })
+    .then((res)=>{
+      localStorage.setItem('access_token',res.data.access)
+      localStorage.setItem('refresh_token',res.data.refresh)
+      axiosInstance.defaults.headers['Authorization']='JWT'+localStorage.getItem('access_token')
+      history.push('/')
+      console.log(res.data)
+    })
+
+
+  }
   const classes = useStyles();
 
   return (
@@ -84,6 +117,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
@@ -95,6 +129,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange= {handleChange}
             />
             
             <Button
@@ -103,6 +138,7 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit}
             >
               Sign In
             </Button>

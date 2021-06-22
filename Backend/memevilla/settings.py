@@ -13,7 +13,9 @@ SECRET_KEY = 'django-insecure-l8@lu*cgc805=)%7lh#01$f6uas*2_r^s7dy-a=7_-9niz(1dm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     #thirdparty
     'verify_email.apps.VerifyEmailConfig',
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -189,9 +192,9 @@ REST_FRAMEWORK={
 }
 #simpleJWT
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1000),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
+    'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 

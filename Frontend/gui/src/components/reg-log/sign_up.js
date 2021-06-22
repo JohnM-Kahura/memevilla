@@ -17,43 +17,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
-function SignUp(){
-  const history=useHistory()
-  const initialFormData=Object.freeze({
-    email:'',
-    username:'',
-    password:'',
-
-  })
-}
-const [formData, setformData] = useState(initialFormData)
-  const handleChange=(e)=>{
-    updateFormData(
-      {
-        ...formData,
-        [e.target.name]:e.target.value.trim(),
-      }
-    )
-  }
-
-
-const handleSubmit =(e)=>{
-  e.preventDefault()
-  console.log(formData)
-  axiosInstance.post(`user/register/`,{
-    email:formData.email,
-    email:formData.username,
-    email:formData.password,
-  })
-  .then((res)=>{
-    history.push('/signin')
-    console.log(res)
-    console.log(res.data)
-  })
-}
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -99,6 +62,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Register() {
+  const history=useHistory()
+  const initialFormData=Object.freeze({
+    email:'',
+    username:'',
+    password:'',
+
+  })
+  
+  const [formData, setFormData] = useState(initialFormData)
+  const handleChange=(e)=>{
+    setFormData(
+      {
+        ...formData,
+        [e.target.name]:e.target.value.trim(),
+
+      }
+    )
+  }
+
+
+const handleSubmit =(e)=>{
+  e.preventDefault()
+  console.log(formData)
+  axiosInstance.post(`user/register/`,{
+    email:formData.email,
+    username:formData.username,
+    password:formData.password,
+  })
+  .then((res)=>{
+    history.push('/')
+    console.log(res)
+    console.log(res.data)
+  })
+}
   const classes = useStyles();
 
   return (
@@ -111,7 +108,7 @@ function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -138,30 +135,8 @@ function Register() {
               onChange={handleChange}
             
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              
-              fullWidth
-              id="email"
-              label="Firstname"
-              name="first_name"
-              autoComplete="first name"
-              onChange={handleChange}
-              
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-             
-              fullWidth
-              id="last_name"
-              label="Lastname"
-              name="last_name"
-              autoComplete="last_name"
-              onChange={handleChange}
-             
-            />
+            
+            
             <TextField
               variant="outlined"
               margin="normal"
@@ -175,19 +150,7 @@ function Register() {
               onChange={handleChange}
 
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Retype Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handleChange}
-
-            />
+            
             
             <Button
               type="submit"
@@ -197,7 +160,7 @@ function Register() {
               className={classes.submit}
               onClick={handleSubmit}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
               <Grid item xs>
