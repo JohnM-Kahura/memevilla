@@ -1,6 +1,7 @@
   
 import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
+
 import axiosInstance from '../../axios_setup';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,10 +16,10 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import axiosInstance from '../../axios_setup';
 
 
-export default function SignUp(){
+
+function SignUp(){
   const history=useHistory()
   const initialFormData=Object.freeze({
     email:'',
@@ -26,7 +27,8 @@ export default function SignUp(){
     password:'',
 
   })
-  const [formData, setformData] = useState(initialFormData)
+}
+const [formData, setformData] = useState(initialFormData)
   const handleChange=(e)=>{
     updateFormData(
       {
@@ -36,6 +38,20 @@ export default function SignUp(){
     )
   }
 
+
+const handleSubmit =(e)=>{
+  e.preventDefault()
+  console.log(formData)
+  axiosInstance.post(`user/register/`,{
+    email:formData.email,
+    email:formData.username,
+    email:formData.password,
+  })
+  .then((res)=>{
+    history.push('/signin')
+    console.log(res)
+    console.log(res.data)
+  })
 }
 
 function Copyright() {
@@ -82,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+function Register() {
   const classes = useStyles();
 
   return (
@@ -108,6 +124,7 @@ export default function Register() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
@@ -118,6 +135,7 @@ export default function Register() {
               label="Username"
               name="username"
               autoComplete="username"
+              onChange={handleChange}
             
             />
             <TextField
@@ -129,6 +147,7 @@ export default function Register() {
               label="Firstname"
               name="first_name"
               autoComplete="first name"
+              onChange={handleChange}
               
             />
             <TextField
@@ -140,6 +159,7 @@ export default function Register() {
               label="Lastname"
               name="last_name"
               autoComplete="last_name"
+              onChange={handleChange}
              
             />
             <TextField
@@ -152,6 +172,8 @@ export default function Register() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
+
             />
             <TextField
               variant="outlined"
@@ -163,6 +185,8 @@ export default function Register() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
+
             />
             
             <Button
@@ -171,7 +195,7 @@ export default function Register() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick
+              onClick={handleSubmit}
             >
               Sign In
             </Button>
@@ -196,3 +220,4 @@ export default function Register() {
     </Grid>
   );
 }
+export default Register
