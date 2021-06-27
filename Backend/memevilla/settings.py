@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -186,9 +187,9 @@ REST_FRAMEWORK={
     'DEFAULT_PERMISSIONS_CLASSES':[
         'rest_framework.permissions.AllowAny', 
     ],
-    'DEFAULT_AUTHENTIACTION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    # 'DEFAULT_AUTHENTIACTION_CLASSES':(
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # )
 }
 #simpleJWT
 SIMPLE_JWT = {
@@ -220,3 +221,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
   
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')  
+MEDIA_URL='/media/'
