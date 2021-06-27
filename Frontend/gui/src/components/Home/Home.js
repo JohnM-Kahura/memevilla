@@ -1,11 +1,12 @@
 import Post from './post/Post'
-import Post1 from './post/post1'
-import data from '../data'
+
+
 import React,  {useState,useEffect} from 'react'
-import AppBar from './AppBar'
+
 
 import axios from 'axios'
 function Home() {
+    const data = []
     const [posts, setposts] = useState(data)
 
     useEffect(() => {
@@ -20,9 +21,9 @@ function Home() {
  
     return (
         <>
-        <AppBar/>
-         <Post posts={posts}/>
-         <Post1/>   
+        
+       
+         <Post posts={posts} />   
           
           
         </>

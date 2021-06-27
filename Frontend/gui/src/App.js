@@ -4,6 +4,7 @@ import Register from './components/reg-log/sign_up'
 import Home from './components/Home/Home'
 import Logout from './components/reg-log/logout';
 import Layout from './containers/Layout'
+
 function App() {
   return (
     <Router>
