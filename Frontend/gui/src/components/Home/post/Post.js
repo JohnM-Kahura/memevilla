@@ -21,10 +21,10 @@ import { Grid,Container } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 600,
+    maxWidth: 400,
   },
   media: {
-    height: 418,
+    height:400,
     paddingTop: '56.25%', // 16:9
   },
   expand: {
@@ -50,7 +50,7 @@ export default function Post({posts}) {
   const [expanded, setExpanded] = React.useState(false);
   
 
- var link="https://i.pinimg.com/564x/24/9b/9c/249b9cde6b7a212aea6a612a6a9577f5.jpg"
+ var link="http://127.0.0.1:8000/media/memes/fuck.jpg"
  var image =new Image()
  image.onload=function() {
      console.log(this.width );
@@ -83,8 +83,8 @@ export default function Post({posts}) {
                             />
                           <CardMedia
                             className={classes.media}
-                            image={link}
-                            title={image}
+                            image={image}
+                            
                             
                             />
                          

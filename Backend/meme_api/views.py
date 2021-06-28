@@ -24,9 +24,9 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView,PostUserWritePermission):
     queryset=Post.objects.all()
     serializer_class=PostSerializer
 
-class MemeUpload(APIView):
-    permission_classes=[IsAuthenticated]
-    parser_classes=[MultiPartParser,FormParser]
+# class MemeUpload(APIView):
+#     permission_classes=[IsAuthenticated]
+#     parser_classes=[MultiPartParser,FormParser]
 
 
     def post(self,request,formart=None):
