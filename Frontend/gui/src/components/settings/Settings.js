@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Studio() {
+function Settings() {
     return (
         <div>
-            studio
+            settings
         </div>
     )
 }
 
-export default Studio
+export default Settings

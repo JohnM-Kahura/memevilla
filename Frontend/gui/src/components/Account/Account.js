@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Studio() {
+function Account() {
     return (
         <div>
-            studio
+            Accounts
         </div>
     )
 }
 
-export default Studio
+export default Account

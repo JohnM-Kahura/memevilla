@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Studio() {
+function Dashboard() {
     return (
         <div>
-            studio
+            dashboard
         </div>
     )
 }
 
-export default Studio
+export default Dashboard

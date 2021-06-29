@@ -1,19 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-
 import CardActions from '@material-ui/core/CardActions';
-
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import ViewsIcon from '@material-ui/icons/Visibility';
 import SaveAltOutlinedIcon from '@material-ui/icons/SaveAltOutlined';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
 import InsertCommentRoundedIcon from '@material-ui/icons/InsertCommentRounded';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Typography } from '@material-ui/core';
@@ -60,7 +56,7 @@ export default function Post({posts}) {
   return (
     <Container >
       <Grid container>
-          <Grid item> 
+          <Grid item  > 
           {posts.map((post)=>{
                         const {image,laughs,views,comment}=post
                         return(

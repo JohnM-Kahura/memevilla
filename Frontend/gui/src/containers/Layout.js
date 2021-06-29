@@ -10,7 +10,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import Search from '@material-ui/icons/Search';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,10 +18,11 @@ import StudioIcon from '@material-ui/icons/MovieCreation';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
 import { Box,  InputBase } from '@material-ui/core';
 import {fade, makeStyles, useTheme } from '@material-ui/core/styles';
-import Home from '../components/Home/Home'
 
+import {Link} from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -99,8 +99,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ResponsiveDrawer(props) {
-  const { window } = props;
+function AppLayout(props) {
+  const { window,children } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -108,114 +108,148 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const handleListClick=()=>{
+  }
+  
 
   const drawer = (
     <div>
-      <Typography>APP</Typography>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Account', 'Settings'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <AccountCircleIcon /> : <SettingsIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        
+          
+          <Link to ='/'>
+          <ListItem button key='Home'  >
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText primary='Home' />
           </ListItem>
-        ))}
+          </Link>
+          <Link to ='/account'>
+          <ListItem button key='Account'  >
+            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+            <ListItemText primary='Account' />
+          </ListItem>
+          </Link>
+          <Link to ='/settings'>
+          <ListItem button key='settings'  >
+            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            <ListItemText primary='Settings' />
+          </ListItem>
+          </Link>
+       
       </List>
       <Divider />
       <List>
-        {['Studio','DashBoard'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <StudioIcon/> : <DashboardIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        
+          
+          <Link to ='/studio'>
+          <ListItem button key='studio'  >
+            <ListItemIcon><StudioIcon /></ListItemIcon>
+            <ListItemText primary='Studio' />
           </ListItem>
-        ))}
+          </Link>
+          <Link to ='/dashboard'>
+          <ListItem button key='dashboard'  >
+            <ListItemIcon><DashboardIcon /></ListItemIcon>
+            <ListItemText primary='DashBoard' />
+          </ListItem>
+          </Link>
+       
       </List>
+     
     </div>
+    
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          
+  
 
-          <Box flexGrow={1}>
-          <Typography variant="h6">
-            Home
-          </Typography>
-          </Box>
-          <Box>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <Search />
+        <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+              >
+              <MenuIcon />
+            </IconButton>
+            
+
+            <Box flexGrow={1}>
+            <Typography variant="h6">
+              Home
+            </Typography>
+            </Box>
+            <Box>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <Search />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                />
             </div>
-            <InputBase
-              placeholder="Search…"
+              
+            </Box>
+            
+          </Toolbar>
+        </AppBar>
+        <nav className={classes.drawer} aria-label="mailbox folders">
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Hidden smUp implementation="css">
+            <Drawer
+              container={container}
+              variant="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
               classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
+                paper: classes.drawerPaper,
               }}
-              inputProps={{ 'aria-label': 'search' }}
-              />
-          </div>
-             
-          </Box>
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              variant="permanent"
+              open
+              >
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+         {children}
           
-        </Toolbar>
-      </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Home/>
-      </main>
-    </div>
+            
+          
+        </main>
+      </div>
+  
   );
 }
 
-ResponsiveDrawer.propTypes = {
+AppLayout.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -223,4 +257,4 @@ ResponsiveDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default AppLayout;
