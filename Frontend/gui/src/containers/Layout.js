@@ -108,8 +108,7 @@ function AppLayout(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const handleListClick=()=>{
-  }
+ 
   
 
   const drawer = (
@@ -240,6 +239,7 @@ function AppLayout(props) {
         <main className={classes.content}>
           <div className={classes.toolbar} />
          {children}
+          
           
             
           
